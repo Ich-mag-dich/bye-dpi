@@ -14,23 +14,25 @@ def test(packet):
         return
     if packet.haslayer(TLSClientHello) == False:
         pass
-        # return
+        return
     # if packet.getlayer(TLSClientHello)[ServerName].servername != b'hitomi.la':
     #     return
     if packet[0][1].src != my_ip: 
         return
-
-    packet.getlayer(TLSClientHello)[ServerName].servername = b'google.com'
+    del packet[TCP][ServerName].servername
+    # packet.getlayer(TLSClientHello)[ServerName].servername = b'google.com'
     # if packet[0][1].dst != "88.80.31.197":
     #     return
-
-    # print(f"DST: {packet[0][1].dst}")
+    print(f"server name: {packet.getlayer(TLSClientHello)[ServerName].servername}")
+    print(f"DST: {packet[0][1].dst}")
+    print(f"SRC: {packet[0][1].src}")
     
     # packet.getlayer(TLSClientHello)[ServerName].servername = b'HItOMl.lA'
     
-    # frags = fragment(packet, fragsize=1000)
+    frags = fragment(packet, fragsize=1000)
     # for i in frags:
-    #     send(i, iface="en0")
+    #     sr(i, iface="en0")
+    
     # packet.show2()
     # print(packet.getlayer(TLSClientHello)[ServerName].servername)
     # send(packet, iface="en0")

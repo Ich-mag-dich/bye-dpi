@@ -68,6 +68,11 @@ def packet_callback(packet):
         print("-----------------------------------\n")
         with open("test.html", "w") as f:
             f.write(res.decode())
+        
+        # replace received packet's data to this res data
+        packet = res
+        
+        ssl_sock.close()
     elif packet[0][1].dst == my_ip and packet[0][1].src == "88.80.31.197":
         print("-----------------------------ww------\n")
         if res != "":

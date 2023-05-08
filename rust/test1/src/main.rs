@@ -13,11 +13,11 @@ async fn main() -> Result<(), Box<dyn Error>> {
     let res = client.get(url_str).send().await?;
     let res2 = res.text().await?;
     println!("{:#?}", client);
-    println!("{:?}", res2); // good works. res status: 200 ok 
+    println!("{:?}", res2); // good works. res status: 200 ok
 
-    // Todo: 패킷 sniff 하고, 해당 패킷의 sni 값을 변조해야함. 
+    // Todo: 패킷 sniff 하고, 해당 패킷의 sni 값을 변조해야함.
 
-    packet_sniff();
+    // packet_sniff();
     Ok(())
 }
 
@@ -37,7 +37,7 @@ fn packet_sniff() {
     loop {
         match cap.next_packet() {
             Ok(packet) => {
-                println!("{:?}", cap.get_datalink());
+                println!("{:?}", packet);
             }
             Err(e) => {
                 println!("Error: {}", e);
